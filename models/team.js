@@ -3,7 +3,7 @@ const Schema=mongoose.Schema;
 
 const teamSchema=new Schema({
 
-        id:{
+        teamId:{
             type:String,
             require:true
         },
