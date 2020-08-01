@@ -7,15 +7,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 const Collection = require("../models/team");
 
-
 class TeamController {
   static async create(req, res) {
-
     try {
       if (!req.body.teamId && req.body.teamId === "") {
         return AfterWare.sendResponse(request, response, 400, {
           status: "Validation Error",
-          message: "name is Required",
+          message: "Team ID is Required",
         });
       } else {
         const collection = new Collection();
@@ -41,7 +39,31 @@ class TeamController {
     }
   }
 
-  static async read(req, res) {}
+  static async view(req, res) {
+    try {
+      const teamId = req.params.teamId;
+
+      if (!teamId && teamId === "") {
+        return Afterware.sendResponse(req, res, 400, {
+          status: "validation error",
+          message: "Enter Proper TeamId",
+        });
+      }
+
+      const collections = await Collection.find({ teamId: teamId });
+      return Afterware.sendResponse(req, res, 200, {
+        status: "success",
+        data: collections,
+      });
+    } catch (error) {
+      console.log(error);
+
+      return Afterware.sendResponse(req, res, 500, {
+        status: "error",
+        message: "Internal Server Error",
+      });
+    }
+  }
 
   static async update(req, res) {}
 
