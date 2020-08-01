@@ -67,7 +67,29 @@ class TeamController {
 
   static async update(req, res) {}
 
-  static async delete(req, res) {}
+  static async delete(req, res) {
+    try {
+      const teamId = req.params.teamId;
+      if (!teamId && teamId === "") {
+        return Afterware.sendResponse(req, res, 400, {
+          status: "Validation Error",
+          message: "Enter Proper TeamId",
+        });
+      }
+
+      await Collection.deleteOne({ teamId: teamId });
+      return Afterware.sendResponse(req, res, 200, {
+        status: "Success",
+        message: "Team Deleted",
+      });
+    } catch (error) {
+      console.error(error);
+      return AfterWare.sendResponse(request, response, 500, {
+        status: "error",
+        message: "Internal Server Error",
+      });
+    }
+  }
 }
 
 module.exports = TeamController;
