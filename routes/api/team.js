@@ -5,5 +5,6 @@ router.post("/create", TeamController.create);
 router.get("/view/:teamId", TeamController.view);
 router.put("/update/:teamId", TeamController.update);
 router.delete("/delete/:teamId", TeamController.delete);
+router.get("/viewall", TeamController.viewall);
 
 module.exports = router;

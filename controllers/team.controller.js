@@ -8,16 +8,6 @@ app.use(express.json());
 const Collection = require("../models/team");
 
 class TeamController {
-
-  static async teamExists(teamId) {
-    const checkTeam = await Collection.find({ teamId: teamId });
-    if (checkTeam.length === 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   static async create(req, res) {
     try {
       if (!req.body.teamId && req.body.teamId === "") {
@@ -68,6 +58,23 @@ class TeamController {
       }
 
       const collections = await Collection.find({ teamId: teamId });
+      return Afterware.sendResponse(req, res, 200, {
+        status: "success",
+        data: collections,
+      });
+    } catch (error) {
+      console.log(error);
+
+      return Afterware.sendResponse(req, res, 500, {
+        status: "error",
+        message: "Internal Server Error",
+      });
+    }
+  }
+
+  static async viewall(req, res) {
+    try {
+      const collections = await Collection.find({});
       return Afterware.sendResponse(req, res, 200, {
         status: "success",
         data: collections,
@@ -139,8 +146,14 @@ class TeamController {
       });
     }
   }
-
- 
+  static async teamExists(teamId) {
+    const checkTeam = await Collection.find({ teamId: teamId });
+    if (checkTeam.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 module.exports = TeamController;
