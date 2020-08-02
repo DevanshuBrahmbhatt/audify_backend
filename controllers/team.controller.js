@@ -72,7 +72,7 @@ class TeamController {
     }
   }
 
-  static async viewall(req, res) {
+  static async viewAll(req, res) {
     try {
       const collections = await Collection.find({});
       return Afterware.sendResponse(req, res, 200, {

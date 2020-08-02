@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
 
-const routes = require('./routes/api/team');
+const routes = require('./routes/api');
 app.use('/api', routes);
 
 
