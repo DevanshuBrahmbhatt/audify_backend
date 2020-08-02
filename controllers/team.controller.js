@@ -6,7 +6,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 const Collection = require("../models/team");
-
 class TeamController {
   static async create(req, res) {
     try {
