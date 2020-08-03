@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 const routes = require('./routes/api');
-app.use('/api', routes);
+app.use('/', routes);
 
 
 
