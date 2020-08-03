@@ -6,7 +6,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 const Collection = require("../models/employee");
-
 class EmployeeController {
   static async create(req, res) {
     try {
@@ -38,7 +37,6 @@ class EmployeeController {
       });
     } catch (error) {
       console.log(error);
-
       return Afterware.sendResponse(req, res, 500, {
         status: "error",
         message: "Internal Server Error",
@@ -62,7 +60,6 @@ class EmployeeController {
       }
     } catch (error) {
       console.log(error);
-
       return Afterware.sendResponse(req, res, 500, {
         status: "error",
         message: "Internal Server Error",
@@ -78,7 +75,6 @@ class EmployeeController {
       });
     } catch (error) {
       console.log(error);
-
       return Afterware.sendResponse(req, res, 500, {
         status: "error",
         message: "Internal Server Error",
@@ -87,8 +83,7 @@ class EmployeeController {
   }
   static async update(req, res) {
     try {
-     const empId = req.params.empId;
-
+      const empId = req.params.empId;
       if (!empId && empId === "") {
         return Afterware.sendResponse(req, res, 400, {
           status: "Validation Error",
@@ -96,7 +91,7 @@ class EmployeeController {
         });
       } else {
         await Collection.updateOne(
-          { empId:empId },
+          { empId: empId },
           {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -112,7 +107,6 @@ class EmployeeController {
       });
     } catch (error) {
       console.log(error);
-
       return Afterware.sendResponse(req, res, 500, {
         status: "error",
         message: "Internal Server Error",
@@ -122,7 +116,6 @@ class EmployeeController {
   static async delete(req, res) {
     try {
       const empId = req.params.empId;
-
       if (!empId && empId === "") {
         return Afterware.sendResponse(req, res, 400, {
           status: "Validation Error",
@@ -136,7 +129,6 @@ class EmployeeController {
       });
     } catch (error) {
       console.log(error);
-
       return Afterware.sendResponse(req, res, 500, {
         status: "error",
         message: "Internal Server Error",
@@ -152,4 +144,4 @@ class EmployeeController {
     }
   }
 }
-module.exports = EmployeeController;
+module.exports = loyeeControll;
