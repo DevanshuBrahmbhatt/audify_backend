@@ -144,4 +144,4 @@ class EmployeeController {
     }
   }
 }
-module.exports = loyeeControll;
+module.exports = EmployeeController;
