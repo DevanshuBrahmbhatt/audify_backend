@@ -30,7 +30,7 @@ module.exports = {
      * http://pm2.keymetrics.io/docs/usage/deployment/
      */
 	deploy: {
-		production: {
+		development: {
 			name: 'Audify_API',
 			user: 'ubuntu',
 			host: '35.183.77.97',
