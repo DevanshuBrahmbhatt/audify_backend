@@ -11,7 +11,7 @@ module.exports = {
 
 	apps: [
 		{
-			name: 'Audify API',
+			name: 'Audify_API',
 			exec_mode: 'fork',
 			script: 'app.js',
 			instances: 1,
@@ -31,14 +31,14 @@ module.exports = {
      */
 	deploy: {
 		production: {
-			name: 'Audify API',
+			name: 'Audify_API',
 			user: 'ubuntu',
 			host: '35.183.77.97',
 			ref: 'origin/development',
 			repo: 'git@github.com:DevanshuBrahmbhatt/audify_backend.git',
 			ssh_options: 'StrictHostKeyChecking=no',
 			path: '/home/ubuntu/workspace/audify_backend',
-			'post-deploy': '/home/ubuntu/.nvm/versions/node/v12.16.1/bin/npm ci && /usr/local/bin/pm2 startOrRestart ecosystem.config.js --only Portfolio',
+			'post-deploy': '/home/ubuntu/.nvm/versions/node/v12.16.1/bin/npm ci && /usr/local/bin/pm2 startOrRestart ecosystem.config.js --only Audify_API',
 			env: {
 				NODE_ENV: 'development'
 			}
