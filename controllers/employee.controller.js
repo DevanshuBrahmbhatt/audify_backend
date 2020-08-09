@@ -9,29 +9,29 @@ const Collection = require("../models/employee");
 class EmployeeController {
   static async create(req, res) {
     try {
-      const empId = req.body.empId;
-      if (!empId && empId === "") {
-        return Afterware.sendResponse(req, res, 400, {
-          status: "Validation Error",
-          message: "Enter Proper EmployeeId",
-        });
-      }
-      if (!(await EmployeeController.empExists(empId))) {
-        return Afterware.sendResponse(req, res, 400, {
-          status: "error",
-          message: "Employee already Exists",
-        });
-      } else {
+      // const empId = req.body.empId;
+      // if (!empId && empId === "") {
+      //   return Afterware.sendResponse(req, res, 400, {
+      //     status: "Validation Error",
+      //     message: "Enter Proper EmployeeId",
+      //   });
+      // }
+      // if (!(await EmployeeController.empExists(empId))) {
+      //   return Afterware.sendResponse(req, res, 400, {
+      //     status: "error",
+      //     message: "Employee already Exists",
+      //   });
+      // } else {
+
         const collection = new Collection();
-        collection.empId = empId;
         collection.firstName = req.body.firstName;
         collection.lastName = req.body.lastName;
         collection.role = req.body.role;
         collection.joinDate = req.body.joinDate;
         collection.mobileNo = req.body.mobileNo;
         collection.save();
-      }
-      return Afterware.sendResponse(req, res, 400, {
+      // }
+      return Afterware.sendResponse(req, res, 200, {
         status: "success",
         message: "new Employee collection created successfully",
       });
@@ -52,7 +52,7 @@ class EmployeeController {
           message: "Enter Proper EmpID",
         });
       } else {
-        const collections = await Collection.find({ empId: empId });
+        const collections = await Collection.find({ _id: empId });
         return Afterware.sendResponse(req, res, 200, {
           status: "success",
           data: collections,
@@ -91,7 +91,7 @@ class EmployeeController {
         });
       } else {
         await Collection.updateOne(
-          { empId: empId },
+          { _id: empId },
           {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -122,7 +122,7 @@ class EmployeeController {
           message: "Enter Proper EmpId",
         });
       }
-      await Collection.deleteOne({ empId: empId });
+      await Collection.deleteOne({ _id: empId });
       return Afterware.sendResponse(req, res, 200, {
         status: "success",
         message: "Employee deleted Successfully",
@@ -135,13 +135,13 @@ class EmployeeController {
       });
     }
   }
-  static async empExists(empId) {
-    const checkEmp = await Collection.find({ empId: empId });
-    if (checkEmp.length === 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // static async empExists(empId) {
+  //   const checkEmp = await Collection.find({ _id: empId });
+  //   if (checkEmp.length === 0) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 }
 module.exports = EmployeeController;

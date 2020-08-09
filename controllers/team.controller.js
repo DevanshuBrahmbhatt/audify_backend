@@ -9,27 +9,26 @@ const Collection = require("../models/team");
 class TeamController {
   static async create(req, res) {
     try {
-      if (!req.body.teamId && req.body.teamId === "") {
-        return AfterWare.sendResponse(request, response, 400, {
-          status: "Validation Error",
-          message: "Team ID is Required",
-        });
-      }
+      // if (!req.body.teamId && req.body.teamId === "") {
+      //   return AfterWare.sendResponse(request, response, 400, {
+      //     status: "Validation Error",
+      //     message: "Team ID is Required",
+      //   });
+      // }
 
-      if (!(await TeamController.teamExists(req.body.teamId))) {
-        return Afterware.sendResponse(req, res, 400, {
-          status: "error",
-          message: "Team already Exists",
-        });
-      } else {
+      // if (!(await TeamController.teamExists(req.body.teamId))) {
+      //   return Afterware.sendResponse(req, res, 400, {
+      //     status: "error",
+      //     message: "Team already Exists",
+      //   });
+      // } else {
         const collection = new Collection();
-        collection.teamId = req.body.teamId;
         collection.name = req.body.name;
         collection.manager = req.body.manager;
         collection.project = req.body.project;
         collection.employee = req.body.employee;
         collection.save();
-      }
+      // }
 
       return Afterware.sendResponse(req, res, 200, {
         status: "success",
@@ -56,7 +55,7 @@ class TeamController {
         });
       }
 
-      const collections = await Collection.find({ teamId: teamId });
+      const collections = await Collection.find({ _id: teamId });
       return Afterware.sendResponse(req, res, 200, {
         status: "success",
         data: collections,
@@ -99,7 +98,7 @@ class TeamController {
         });
       } else {
         await Collection.updateOne(
-          { teamId: teamId },
+          { _id: teamId },
           {
             name: req.body.name,
             manager: req.body.manager,
@@ -132,7 +131,7 @@ class TeamController {
         });
       }
 
-      await Collection.deleteOne({ teamId: teamId });
+      await Collection.deleteOne({ _id: teamId });
       return Afterware.sendResponse(req, res, 200, {
         status: "Success",
         message: "Team Deleted",
@@ -145,14 +144,14 @@ class TeamController {
       });
     }
   }
-  static async teamExists(teamId) {
-    const checkTeam = await Collection.find({ teamId: teamId });
-    if (checkTeam.length === 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // static async teamExists(teamId) {
+  //   const checkTeam = await Collection.find({ _id: teamId });
+  //   if (checkTeam.length === 0) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 }
 
 module.exports = TeamController;
