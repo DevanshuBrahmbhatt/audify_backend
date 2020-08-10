@@ -153,14 +153,23 @@ class EmployeeController {
         ],
       });
 
+      console.log(checkEmp[0].role);
       if (checkEmp.length === 0) {
         return Afterware.sendResponse(req, res, 400, {
           status: "Validation Error",
           message: "You are not Allowed",
         });
-      } else {
+      } else if(checkEmp[0].role === 'CEO') {
         return Afterware.sendResponse(req, res, 200, {
           status: "success",
+          flag:1,
+          message: "CEO Logged In",
+        });
+      }
+      else{
+        return Afterware.sendResponse(req, res, 200, {
+          status: "success",
+          flag:0,
           message: "Employee Logged In",
         });
       }
