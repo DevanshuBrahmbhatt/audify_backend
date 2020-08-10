@@ -99,6 +99,8 @@ class EmployeeController {
             role: req.body.role,
             joinDate: req.body.joinDate,
             mobileNo: req.body.mobileNo,
+            email: req.body.email,
+            password: req.body.password,
           }
         );
       }
