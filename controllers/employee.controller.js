@@ -9,28 +9,29 @@ const Collection = require("../models/employee");
 class EmployeeController {
   static async create(req, res) {
     try {
-      // const empId = req.body.empId;
+      const empEmail = req.body.email;
       // if (!empId && empId === "") {
       //   return Afterware.sendResponse(req, res, 400, {
       //     status: "Validation Error",
       //     message: "Enter Proper EmployeeId",
       //   });
       // }
-      // if (!(await EmployeeController.empExists(empId))) {
-      //   return Afterware.sendResponse(req, res, 400, {
-      //     status: "error",
-      //     message: "Employee already Exists",
-      //   });
-      // } else {
-
+      if (!(await EmployeeController.empExists(empEmail))) {
+        return Afterware.sendResponse(req, res, 400, {
+          status: "error",
+          message: "Employee already Exists",
+        });
+      } else {
         const collection = new Collection();
+        collection.email = req.body.email;
+        collection.password = req.body.password;
         collection.firstName = req.body.firstName;
         collection.lastName = req.body.lastName;
         collection.role = req.body.role;
         collection.joinDate = req.body.joinDate;
         collection.mobileNo = req.body.mobileNo;
         collection.save();
-      // }
+      }
       return Afterware.sendResponse(req, res, 200, {
         status: "success",
         message: "new Employee collection created successfully",
@@ -135,13 +136,48 @@ class EmployeeController {
       });
     }
   }
-  // static async empExists(empId) {
-  //   const checkEmp = await Collection.find({ _id: empId });
-  //   if (checkEmp.length === 0) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
+  static async login(req, res) {
+    const email = req.body.email;
+    const password = req.body.password;
+    try {
+      const checkEmp = await Collection.find({
+        $and: [
+          {
+            email: email,
+          },
+          {
+            password: password,
+          },
+        ],
+      });
+
+      if (checkEmp.length === 0) {
+        return Afterware.sendResponse(req, res, 400, {
+          status: "Validation Error",
+          message: "You are not Allowed",
+        });
+      } else {
+        return Afterware.sendResponse(req, res, 200, {
+          status: "success",
+          message: "Employee Logged In",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      return Afterware.sendResponse(req, res, 500, {
+        status: "error",
+        message: "Internal Server Error",
+      });
+    }
+  }
+
+  static async empExists(empEmail) {
+    const checkEmp = await Collection.find({ email: empEmail });
+    if (checkEmp.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 module.exports = EmployeeController;

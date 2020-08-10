@@ -6,6 +6,7 @@ router.get("/viewAll",EmployeeController.viewAll);
 router.get("/view/:empId",EmployeeController.viewEmp);
 router.put("/update/:empId", EmployeeController.update);
 router.delete("/delete/:empId", EmployeeController.delete);
+router.post("/login", EmployeeController.login);
 
 
 module.exports = router;
