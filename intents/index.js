@@ -1,5 +1,4 @@
 const jwtDecode = require('jwt-decode');
-
 const Availability = require('./Availability');
 
 module.exports = (req, res) => {
@@ -21,10 +20,13 @@ module.exports = (req, res) => {
         case 'set-availability':
             Availability.set(req, res, Request);
             break;
+
+        case 'get-availability':
+            Availability.get(req, res, Request);
+            break;
         
         default:
             console.log('default')
             return res.send({});
-            break;
     }
 }
