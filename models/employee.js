@@ -24,5 +24,8 @@ const EmployeeSchema = new Schema({
   mobileNo: {
     type: String,
   },
+  status: {
+    type: String
+  }
 });
 module.exports = employee = mongoose.model("employee", EmployeeSchema);
