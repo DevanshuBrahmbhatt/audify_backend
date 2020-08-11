@@ -1,4 +1,5 @@
 const Afterware = require("../lib/afterware");
+const moment = require('moment');
 const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
@@ -6,6 +7,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 const Collection = require("../models/employee");
+const Notification = require("../models/notification");
 class EmployeeController {
   static async create(req, res) {
     try {
@@ -189,6 +191,25 @@ class EmployeeController {
     } else {
       return false;
     }
+  }
+
+  static async getNotifications(req, res) {
+    const to = req.query.email;
+    const notifications = await Notification.find({to});
+    const data = [];
+
+    for(let i=0; i<notifications.length; i++){
+      data.push({
+        id: notifications[i]._id,
+        notification: notifications[i].notification,
+        time: moment(notifications[i].createdAt).fromNow()
+      });
+    }
+
+    return Afterware.sendResponse(req, res, 200, {
+      status: "success",
+      data: data
+    });
   }
 }
 module.exports = EmployeeController;
