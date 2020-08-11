@@ -1,5 +1,6 @@
 const jwtDecode = require('jwt-decode');
 const Availability = require('./Availability');
+const Notification = require('./Notification');
 
 module.exports = (req, res) => {
 
@@ -23,6 +24,14 @@ module.exports = (req, res) => {
 
         case 'get-availability':
             Availability.get(req, res, Request);
+            break;
+        
+        case 'get-availability - yes':
+            Availability.getYes(req, res, Request);
+            break;
+        
+        case 'send notification':
+            Notification.send(req, res, Request);
             break;
         
         default:
