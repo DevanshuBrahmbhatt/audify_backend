@@ -1,5 +1,5 @@
 const Afterware = require("../lib/afterware");
-const moment = require('moment');
+const moment = require("moment");
 const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
@@ -161,17 +161,16 @@ class EmployeeController {
           status: "Validation Error",
           message: "You are not Allowed",
         });
-      } else if(checkEmp[0].role === 'CEO') {
+      } else if (checkEmp[0].role === "CEO") {
         return Afterware.sendResponse(req, res, 200, {
           status: "success",
-          flag:1,
+          flag: 1,
           message: "CEO Logged In",
         });
-      }
-      else{
+      } else {
         return Afterware.sendResponse(req, res, 200, {
           status: "success",
-          flag:0,
+          flag: 0,
           message: "Employee Logged In",
         });
       }
@@ -195,21 +194,45 @@ class EmployeeController {
 
   static async getNotifications(req, res) {
     const to = req.query.email;
-    const notifications = await Notification.find({to});
+    const notifications = await Notification.find({ to });
     const data = [];
 
-    for(let i=0; i<notifications.length; i++){
+    for (let i = 0; i < notifications.length; i++) {
       data.push({
         id: notifications[i]._id,
         notification: notifications[i].notification,
-        time: moment(notifications[i].createdAt).fromNow()
+        time: moment(notifications[i].createdAt).fromNow(),
       });
     }
 
     return Afterware.sendResponse(req, res, 200, {
       status: "success",
-      data: data
+      data: data,
     });
+  }
+  static async deleteNotifications(req, res) {
+    try {
+      const id = req.params.id;
+      console.log(id);
+
+      if (!id && id === "") {
+        return Afterware.sendResponse(req, res, 400, {
+          status: "Validation Error",
+          message: "Enter Proper id",
+        });
+      }
+      await Notification.deleteOne({ _id: id });
+      return Afterware.sendResponse(req, res, 200, {
+        status: "success",
+        message: "Notification deleted Successfully",
+      });
+    } catch (err) {
+      console.log(error);
+      return Afterware.sendResponse(req, res, 500, {
+        status: "error",
+        message: "Internal Server Error",
+      });
+    }
   }
 }
 module.exports = EmployeeController;

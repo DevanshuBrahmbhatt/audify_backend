@@ -3,7 +3,6 @@ const NotificationSch = require("../models/notification");
 const Employee = require("../models/employee");
 
 class Notification {
-    
   static async send (req, res, Request) {
 
     const name = Request.Parameters['given-name'];

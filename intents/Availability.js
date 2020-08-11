@@ -2,7 +2,7 @@ const _ = require('lodash');
 const Employee = require("../models/employee");
 
 class SetAvailability {
-    
+
   static async set (req, res, Request) {
     await Employee.findOneAndUpdate(
         {email: Request.User.email},

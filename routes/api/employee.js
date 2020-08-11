@@ -8,6 +8,7 @@ router.put("/update/:empId", EmployeeController.update);
 router.delete("/delete/:empId", EmployeeController.delete);
 router.post("/login", EmployeeController.login);
 router.get("/getNotifications", EmployeeController.getNotifications);
+router.delete("/deleteNotifications/:id", EmployeeController.deleteNotifications);
 
 
 module.exports = router;
