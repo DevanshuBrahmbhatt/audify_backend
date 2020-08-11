@@ -18,6 +18,13 @@ class SetAvailability {
           {firstName: {$regex: new RegExp(name, "i")}}
         );
 
+        let message;
+        if(user && user.firstName && user.status){
+          message = `${user.firstName} is currently ${user.status}.`;
+        }else{
+          message = `Sorry I couldn't find the status of ${name}`;
+        }
+
         return res.send({
             payload: {
               google: {
@@ -26,7 +33,7 @@ class SetAvailability {
                   items: [
                     {
                       simpleResponse: {
-                        textToSpeech: `${user.firstName} is currently ${user.status}.`
+                        textToSpeech: message
                       }
                     }
                   ]
