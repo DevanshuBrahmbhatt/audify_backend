@@ -12,8 +12,10 @@ class SetAvailability {
 
     static async get (req, res, Request) {
 
+        const name = Request.Parameters['given-name'];
+
         const user = await Employee.findOne(
-            {firstName: Request.Parameters['given-name'].toLowerCase()}
+          {firstName: {$regex: new RegExp(name, "i")}}
         );
 
         return res.send({
