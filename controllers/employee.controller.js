@@ -213,7 +213,6 @@ class EmployeeController {
   static async deleteNotifications(req, res) {
     try {
       const id = req.params.id;
-      console.log(id);
 
       if (!id && id === "") {
         return Afterware.sendResponse(req, res, 400, {
