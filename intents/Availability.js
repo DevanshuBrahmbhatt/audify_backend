@@ -13,7 +13,7 @@ class SetAvailability {
     static async get (req, res, Request) {
 
         const user = await Employee.findOne(
-            {firstName: Request.Parameters['given-name']}
+            {firstName: Request.Parameters['given-name'].toLowerCase()}
         );
 
         return res.send({
