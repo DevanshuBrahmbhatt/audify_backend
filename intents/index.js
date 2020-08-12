@@ -34,6 +34,14 @@ module.exports = (req, res) => {
             Notification.send(req, res, Request);
             break;
         
+        case 'check notifications':
+            Notification.check(req, res, Request);
+            break;
+        
+        case 'check notifications - yes':
+            Notification.read(req, res, Request);
+            break;
+        
         default:
             console.log('default')
             return res.send({});
