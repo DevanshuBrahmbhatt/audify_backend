@@ -192,9 +192,27 @@ class EmployeeController {
     }
   }
 
+  // static async getNotifications(req, res) {
+  //   const to = req.query.email;
+  //   const notifications = await Notification.find({ to });
+  //   const data = [];
+
+  //   for (let i = 0; i < notifications.length; i++) {
+  //     data.push({
+  //       id: notifications[i]._id,
+  //       notification: notifications[i].notification,
+  //       time: moment(notifications[i].createdAt).fromNow(),
+  //     });
+  //   }
+
+  //   return Afterware.sendResponse(req, res, 200, {
+  //     status: "success",
+  //     data: data,
+  //   });
+  // }
   static async getNotifications(req, res) {
-    const to = req.query.email;
-    const notifications = await Notification.find({ to });
+    // const to = req.query.email;
+    const notifications = await Notification.find({});
     const data = [];
 
     for (let i = 0; i < notifications.length; i++) {
