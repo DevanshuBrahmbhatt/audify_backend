@@ -1,22 +1,22 @@
-const _ = require('lodash');
-const Task = require("../models/task");
+const _ = require("lodash");
+const Tasksh = require("../models/task");
 const Employee = require("../models/employee");
 
+class Task {
+  static async setTaskName(req, res, Request) {
+      // console.log("req"+ JSON.stringify(req));
+      // console.log("res"+  JSON.stringify(res));
+      console.log(Request);
+    // const name = Request.Parameters["task-name"];
+    // if(name != '' && name!= undefined){
+    //   const task =new Tasksh();
+    //   task.name=name;
+    //   task.save();
+    // }
 
-
-class Task{
-    static async  setTaskName(req,res,Request){
-
-        const name = Request.Parameters['given-name'];
-        
-
-
-    }
-
-    static async  getEmployees(req,res,Request){
-
-    }
+    // console.log(name);
+    return res.send({});
+  }
 }
-
 
 module.exports = Task;

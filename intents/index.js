@@ -44,11 +44,10 @@ module.exports = (req, res) => {
       Notification.read(req, res, Request);
       break;
 
-    case "assign task":
-      Task.getEmployees(req, res, Request);
-      break;
     
-    
+      case "assigntask":
+        Task.setTaskName(req, res, Request);
+        break;
 
     default:
       console.log("default");
