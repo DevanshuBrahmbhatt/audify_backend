@@ -44,10 +44,9 @@ module.exports = (req, res) => {
       Notification.read(req, res, Request);
       break;
 
-    
-      case "assigntask":
-        Task.setTaskName(req, res, Request);
-        break;
+    case "assign-task":
+      Task.setTaskName(req, res, Request);
+      break;
 
     default:
       console.log("default");
