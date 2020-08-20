@@ -40,7 +40,13 @@ class Task {
   static async getTask(req, res, Request) {
     const employee = Request.User.given_name;
     const task = await Tasksh.findOne({ assign_to: employee });
-    let message = `Hello! ${task.assign_to}, Today your taskname is ${task.name} and description is ${task.description}`;
+    let message;
+
+    if (task) {
+      message = `Hello! ${task.assign_to}, Today your taskname is ${task.name} and description is ${task.description}`;
+    } else {
+      message = `${task.assign_to}  you don't have any task for today`;
+    }
 
     return res.send({
       payload: {
