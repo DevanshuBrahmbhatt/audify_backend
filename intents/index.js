@@ -45,7 +45,11 @@ module.exports = (req, res) => {
       break;
 
     case "assign-task":
-      Task.setTaskName(req, res, Request);
+      Task.setTask(req, res, Request);
+      break;
+
+    case "get-task":
+      Task.getTask(req, res, Request);
       break;
 
     default:
