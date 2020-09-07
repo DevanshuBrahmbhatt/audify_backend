@@ -12,12 +12,7 @@ class EmployeeController {
   static async create(req, res) {
     try {
       const empEmail = req.body.email;
-      // if (!empId && empId === "") {
-      //   return Afterware.sendResponse(req, res, 400, {
-      //     status: "Validation Error",
-      //     message: "Enter Proper EmployeeId",
-      //   });
-      // }
+
       if (!(await EmployeeController.empExists(empEmail))) {
         return Afterware.sendResponse(req, res, 400, {
           status: "error",
