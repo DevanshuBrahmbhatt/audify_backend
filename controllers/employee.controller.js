@@ -187,27 +187,9 @@ class EmployeeController {
     }
   }
 
-  // static async getNotifications(req, res) {
-  //   const to = req.query.email;
-  //   const notifications = await Notification.find({ to });
-  //   const data = [];
-
-  //   for (let i = 0; i < notifications.length; i++) {
-  //     data.push({
-  //       id: notifications[i]._id,
-  //       notification: notifications[i].notification,
-  //       time: moment(notifications[i].createdAt).fromNow(),
-  //     });
-  //   }
-
-  //   return Afterware.sendResponse(req, res, 200, {
-  //     status: "success",
-  //     data: data,
-  //   });
-  // }
   static async getNotifications(req, res) {
-    // const to = req.query.email;
-    const notifications = await Notification.find({});
+    const to = req.query.email;
+    const notifications = await Notification.find({ to });
     const data = [];
 
     for (let i = 0; i < notifications.length; i++) {
@@ -223,6 +205,24 @@ class EmployeeController {
       data: data,
     });
   }
+  // static async getNotifications(req, res) {
+  //   // const to = req.query.email;
+  //   const notifications = await Notification.find({});
+  //   const data = [];
+
+  //   for (let i = 0; i < notifications.length; i++) {
+  //     data.push({
+  //       id: notifications[i]._id,
+  //       notification: notifications[i].notification,
+  //       time: moment(notifications[i].createdAt).fromNow(),
+  //     });
+  //   }
+
+  //   return Afterware.sendResponse(req, res, 200, {
+  //     status: "success",
+  //     data: data,
+  //   });
+  // }
   static async deleteNotifications(req, res) {
     try {
       const id = req.params.id;
@@ -245,6 +245,21 @@ class EmployeeController {
         message: "Internal Server Error",
       });
     }
+  }
+  static async allowAccess(req,res){
+try{
+  const email=req.params.email;
+  //verify the token from calendar.
+  //for setting time and date new intent will be created.
+
+}
+catch (err) {
+  console.log(error);
+  return Afterware.sendResponse(req, res, 500, {
+    status: "error",
+    message: "Internal Server Error",
+  });
+}
   }
 }
 module.exports = EmployeeController;

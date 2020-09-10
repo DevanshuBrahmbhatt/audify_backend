@@ -2,6 +2,7 @@ const jwtDecode = require("jwt-decode");
 const Availability = require("./Availability");
 const Notification = require("./Notification");
 const Task = require("./Task");
+const Meet=require("./Meet");
 
 module.exports = (req, res) => {
   // console.log(JSON.stringify(req.body))
@@ -50,6 +51,10 @@ module.exports = (req, res) => {
 
     case "get-task":
       Task.getTask(req, res, Request);
+      break;
+
+    case "create-meet":
+      Meet.dialogflowFirebaseFulfillment(req, res, Request);
       break;
 
     default:
