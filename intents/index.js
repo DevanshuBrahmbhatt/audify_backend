@@ -2,7 +2,8 @@ const jwtDecode = require("jwt-decode");
 const Availability = require("./Availability");
 const Notification = require("./Notification");
 const Task = require("./Task");
-const Meet=require("./Meet");
+const Meet = require("./Meet");
+const Client=require("./Client");
 
 module.exports = (req, res) => {
   // console.log(JSON.stringify(req.body))
@@ -55,6 +56,10 @@ module.exports = (req, res) => {
 
     case "create-meet":
       Meet.dialogflowFirebaseFulfillment(req, res, Request);
+      break;
+
+    case "client-updates":
+      Client.sendUpdates(req, res, Request);
       break;
 
     default:

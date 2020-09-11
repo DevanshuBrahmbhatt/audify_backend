@@ -22,7 +22,7 @@ const serviceAccount = {
       "http://localhost",
       "http://localhost:5001",
       "https://audify-9c8e3.firebaseapp.com",
-      ""
+      "",
     ],
   },
 };
@@ -46,15 +46,13 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
     console.log("Parameters", agent.parameters);
     const appointment_type = agent.parameters.agenda;
 
-
     let intentMap = new Map();
     intentMap.set("Schedule Appointment", makeAppointment);
     agent.handleRequest(intentMap);
 
-    
-     function  makeAppointment(agent) {
-    //   Calculate appointment start and end datetimes (end = +1hr from start)
-      console.log("In Make"+"Parameters", agent.parameters.date);
+    function makeAppointment(agent) {
+      //   Calculate appointment start and end datetimes (end = +1hr from start)
+      console.log("In Make" + "Parameters", agent.parameters.date);
 
       const dateTimeStart = new Date(
         Date.parse(
@@ -87,7 +85,6 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
           );
         });
     }
-
   }
 );
 
@@ -129,4 +126,3 @@ function createCalendarEvent(dateTimeStart, dateTimeEnd, appointment_type) {
     );
   });
 }
-

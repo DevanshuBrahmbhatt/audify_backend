@@ -22,14 +22,14 @@ const ClientSchema = new Schema({
   },
   chat: [
     {
-      send: {
+      message: {
         type: String,
         timestamps: true,
       },
-      reply: {
+      name: {
         type: String,
-        timestamps: true,
       },
+
     },
   ],
 });
