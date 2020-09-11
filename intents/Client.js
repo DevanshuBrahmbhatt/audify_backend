@@ -5,26 +5,25 @@ class Client {
   static async sendUpdates(req, res, Request) {
     const name = Request.Parameters["client_name"];
 
-    console.log("Name"+name);
+    console.log("Name" + name);
     let message;
     const user = await Clientsc.findOne({
       firstName: { $regex: new RegExp(name, "i") },
     });
-    console.log("User vadu"+ user.firstName);
-
+    console.log("User vadu" + user.firstName);
 
     if (user) {
       await Clientsc.updateOne(
-        { firstName:  user.firstName },
-        
-        {chat:
-          {
-          name: user.firstName,
-          message: Request.Parameters["updates"]
+        { firstName: user.firstName },
+
+        {
+          chat: {
+            name: user.firstName,
+            message: Request.Parameters["updates"],
+          },
         }
-      }
       );
-      message=`Update send to ${user.firstName}`;
+      message = `Update send to ${user.firstName}`;
     } else {
       message = `Sorry, I haven't send any updates`;
     }
