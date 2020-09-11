@@ -12,7 +12,7 @@ class TaskController {
   static async viewAll(req, res) {
     try {
       const collections = await Collection.find({});
-      console.log(collections);
+      // console.log(collections);
       return Afterware.sendResponse(req, res, 200, {
         status: "success",
         data: collections,
