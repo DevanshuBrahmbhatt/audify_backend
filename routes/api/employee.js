@@ -9,6 +9,7 @@ router.delete("/delete/:empId", EmployeeController.delete);
 router.post("/login", EmployeeController.login);
 router.get("/getNotifications", EmployeeController.getNotifications);
 router.delete("/deleteNotifications/:id", EmployeeController.deleteNotifications);
+router.post("/saveTokens", EmployeeController.saveTokens);
 
 
 module.exports = router;

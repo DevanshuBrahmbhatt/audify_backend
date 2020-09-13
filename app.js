@@ -7,13 +7,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const port = 5001;
 app.set('port', process.env.port || port);
 app.use(bodyParser.json());
-app.use(express.json());
+// app.use(express.json());
 app.use(cors());
 
 const Fullfillment = require('./intents/index');
 app.use('/fullfillment', Fullfillment);
 
 const routes = require('./routes/api');
+app.use('/public', express.static('public'));
 app.use('/', routes);
 
 // DB Connection Done

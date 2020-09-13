@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="google-signin-client_id" content="993657414746-0vio5lmpt74c05tk6og1qkfi73mrb2mv.apps.googleusercontent.com">
+</head>
+<body>
+    <div id="my-signin2"></div>
+    <script>
+
+        async function onSuccess(googleUser) {
+            console.log(googleUser);
+            console.log(JSON.stringify(googleUser.getAuthResponse(true)));
+            const r = await fetch(`/employee/saveTokens`, {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    'email': 'parthshahk@gmail.com',
+                    'obj': googleUser.getAuthResponse(true)
+                })
+            });
+            console.log(r.json());
+        }
+
+        function onFailure(error) {
+            console.log(error);
+        }
+
+        function renderButton() {
+            gapi.signin2.render('my-signin2', {
+                'scope': 'profile email https://www.googleapis.com/auth/calendar',
+                'width': 240,
+                'height': 50,
+                'longtitle': true,
+                'theme': 'dark',
+                'onsuccess': onSuccess,
+                'onfailure': onFailure,
+                'responseType': 'code'
+            });
+        }
+
+    </script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+</body>
+</html>

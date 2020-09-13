@@ -26,6 +26,9 @@ const EmployeeSchema = new Schema({
   },
   status: {
     type: String
+  },
+  calendarAccess: {
+    type: Object
   }
 });
 module.exports = employee = mongoose.model("employee", EmployeeSchema);
