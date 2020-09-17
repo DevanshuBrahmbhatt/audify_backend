@@ -6,9 +6,10 @@ const moment = require('moment');
 function getAuthClient() {
     const oAuth2Client = new google.auth.OAuth2(
         '993657414746-0vio5lmpt74c05tk6og1qkfi73mrb2mv.apps.googleusercontent.com',
-        'YxK6Yl_blQMg916D67q5o-2U', 
+        'YxK6Yl_blQMg916D67q5o-2U',
         [
             "https://audify.live"
+            // "https://b40d9269de2e.ngrok.io/"
         ]);
     return oAuth2Client;
 }
@@ -29,7 +30,7 @@ async function getAccessToken(connection, oAuth2Client) {
             console.log({auth_token : connection, is_refresh : false});
             resolve({auth_token : connection, is_refresh : false});
         }
-    }); 
+    });
 }
 
 async function getUserProfile(auth_token) {
@@ -69,6 +70,14 @@ function getCalendarList(auth_token) {
         });
     })
 }
+
+let queryObj = {
+    start: moment().utc().add(1, 'day').format(),
+    end: moment().utc().add(1, 'day').add(1, 'hour').format(),
+    visitorEmail : '17itubs050@ddu.ac.in',
+    description : `Hi Devanshu please join meeting`,
+    title : "Discussion about project"
+};
 
 function createEvent(auth_token, queryObj) {
     let postData = {
@@ -114,13 +123,6 @@ function createEvent(auth_token, queryObj) {
 }
 
 
-let queryObj = {
-    start: moment().utc().add(1, 'day').format(),
-    end: moment().utc().add(1, 'day').add(1, 'hour').format(),
-    visitorEmail : 'parth.shah@edeltaes.com',
-    description : `Hi parth please join meeting`,
-    title : "Discussion about project"
-};
 
 
 module.exports= {
@@ -130,8 +132,8 @@ module.exports= {
     getCalendarList,
     createEvent,
 }
-// createEvent('ya29.a0AfH6SMBTD65Ks8ltYh335beX5vCuxyNJc_-uXKhXgxJcx1JUZ8BxsnT8JoAYu2XWBI_bW0xQ3x49NS5IITSGgnE8IM441csAhAYXJOTb8GmJ7dk5PdpV-GZ2wZUQ2YvyTYLlTohbsMEO3oApM5VmAQLO7DW6jCuZpSA', queryObj)
+createEvent('ya29.a0AfH6SMAjYlPARpfTPmTYU2NZbVMHAo6xzDLGT6yO92GvLWKqTEshPIJ-cZ_GMjgLnerImNzXbB_ldiUAasGgLkkWFj0bDj9a4J3M2W6Tj9tbv8CuJx0nu6eTxf8daDFeJSERT1QtusN__AK9paAUW0A53POsFqGRfDUk', queryObj)
 
 // getCalendarList('ya29.a0AfH6SMBTD65Ks8ltYh335beX5vCuxyNJc_-uXKhXgxJcx1JUZ8BxsnT8JoAYu2XWBI_bW0xQ3x49NS5IITSGgnE8IM441csAhAYXJOTb8GmJ7dk5PdpV-GZ2wZUQ2YvyTYLlTohbsMEO3oApM5VmAQLO7DW6jCuZpSA')
 
-// getAccessToken('ya29.a0AfH6SMBTD65Ks8ltYh335beX5vCuxyNJc_-uXKhXgxJcx1JUZ8BxsnT8JoAYu2XWBI_bW0xQ3x49NS5IITSGgnE8IM441csAhAYXJOTb8GmJ7dk5PdpV-GZ2wZUQ2YvyTYLlTohbsMEO3oApM5VmAQLO7DW6jCuZpSA', getAuthClient());
+getAccessToken('ya29.a0AfH6SMAjYlPARpfTPmTYU2NZbVMHAo6xzDLGT6yO92GvLWKqTEshPIJ-cZ_GMjgLnerImNzXbB_ldiUAasGgLkkWFj0bDj9a4J3M2W6Tj9tbv8CuJx0nu6eTxf8daDFeJSERT1QtusN__AK9paAUW0A53POsFqGRfDUk', getAuthClient());

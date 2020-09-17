@@ -1,3 +1,4 @@
+const { chat } = require("googleapis/build/src/apis/chat");
 const _ = require("lodash");
 const Clientsc = require("../models/client");
 
@@ -45,37 +46,39 @@ class Client {
     });
   }
 
-  // static async getUpdates(req, res, Request) {
-  //   const name = Request.Parameters["given-name"];
+  static async getUpdates(req, res, Request) {
 
-  //   const user = await Employee.findOne({
-  //     firstName: { $regex: new RegExp(name, "i") },
-  //   });
+    // console.log(Request);
 
-  //   let message;
-  //   if (user && user.firstName && user.status) {
-  //     message = `${user.firstName} is currently ${user.status}. Would you like to send him a notification?`;
-  //   } else {
-  //     message = `Sorry, I couldn't find the status of ${name}`;
-  //   }
+    const client = await Clientsc.findOne({
+      firstName:Request.User.given_name
+    });
 
-  //   return res.send({
-  //     payload: {
-  //       google: {
-  //         expectUserResponse: true,
-  //         richResponse: {
-  //           items: [
-  //             {
-  //               simpleResponse: {
-  //                 textToSpeech: message,
-  //               },
-  //             },
-  //           ],
-  //         },
-  //       },
-  //     },
-  //   });
-  // }
+console.log("data"+client);
+    let message;
+    if (client.chat[0].message) {
+      message = ` Hello your work update is ${client.chat[0].message}, And Would you like to send them feedback  `;
+    } else {
+      message = `Sorry, I couldn't find the work updates for you`;
+    }
+
+    return res.send({
+      payload: {
+        google: {
+          expectUserResponse: true,
+          richResponse: {
+            items: [
+              {
+                simpleResponse: {
+                  textToSpeech: message,
+                },
+              },
+            ],
+          },
+        },
+      },
+    });
+  }
 
   // static async getYes(req, res, Request) {
   //   let name;

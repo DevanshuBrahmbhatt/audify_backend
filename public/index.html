@@ -10,36 +10,36 @@
     <div id="my-signin2"></div>
     <script>
 
-        async function onSuccess(googleUser) {
-            const r = await fetch(`/employee/saveTokens`, {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    'email': googleUser.getBasicProfile().getEmail(),
-                    'obj': googleUser.getAuthResponse(true)
-                })
-            });
-        }
+            async function onSuccess(googleUser) {
+                const r = await fetch(`/employee/saveTokens`, {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        'email': googleUser.getBasicProfile().getEmail(),
+                        'obj': googleUser.getAuthResponse(true)
+                    })
+                });
+            }
 
-        function onFailure(error) {
-            console.log(error);
-        }
+            function onFailure(error) {
+                console.log(error);
+            }
 
-        function renderButton() {
-            gapi.signin2.render('my-signin2', {
-                'scope': 'profile email https://www.googleapis.com/auth/calendar',
-                'width': 240,
-                'height': 50,
-                'longtitle': true,
-                'theme': 'dark',
-                'onsuccess': onSuccess,
-                'onfailure': onFailure,
-                'responseType': 'code'
-            });
-        }
+            function renderButton() {
+                gapi.signin2.render('my-signin2', {
+                    'scope': 'profile email https://www.googleapis.com/auth/calendar',
+                    'width': 240,
+                    'height': 50,
+                    'longtitle': true,
+                    'theme': 'dark',
+                    'onsuccess': onSuccess,
+                    'onfailure': onFailure,
+                    'responseType': 'code'
+                });
+            }
 
     </script>
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
