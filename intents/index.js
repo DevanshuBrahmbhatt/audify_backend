@@ -55,7 +55,7 @@ module.exports = (req, res) => {
       break;
 
     case "create-meet":
-      CreateMeet.createEvent(req, res, Request);
+      CreateMeet.setEvent(req, res, Request);
       break;
 
     case "client-updates":

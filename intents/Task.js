@@ -5,7 +5,7 @@ const employee = require("../models/employee");
 
 class Task {
   static async setTask(req, res, Request) {
-    console.log(Request);
+    // console.log(Request);
     const taskName = Request.Parameters["task-name"];
     const taskDescription = Request.Parameters["task-description"];
     const employeeName = Request.Parameters["given-name"];
