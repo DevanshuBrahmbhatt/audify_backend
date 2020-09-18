@@ -2,8 +2,7 @@ const _ = require("lodash");
 const Employee = require("../models/employee");
 const Team = require("../models/team");
 const Meet = require("./MeetFunctions");
-const moment=require("moment");
-
+const moment = require("moment");
 
 class CreateMeet {
   static async setEvent(req, res, Request) {
@@ -16,6 +15,7 @@ class CreateMeet {
     const employeeEmails = [];
 
     const find_team = await Team.findOne({ name: team });
+    // console.log("Response"+find_team);
     console.log(find_team.employee[0].employee);
     console.log(find_team.employee[0].employee.length);
 
@@ -31,9 +31,7 @@ class CreateMeet {
       employeeEmails.push(emp.email);
     }
     console.log("Array of Emp Emails" + employeeEmails);
-
     const host = await Employee.findOne({ email: Request.User.email });
-
     await Meet.getAccessToken(
       host.calendarAccess.access_token,
       Meet.getAuthClient()

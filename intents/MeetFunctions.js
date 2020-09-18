@@ -8,7 +8,8 @@ function getAuthClient() {
         '993657414746-0vio5lmpt74c05tk6og1qkfi73mrb2mv.apps.googleusercontent.com',
         'YxK6Yl_blQMg916D67q5o-2U',
         [
-            "https://audify.live"
+            "https://audify.live",
+            "http://localhost:5001"
             // "https://b40d9269de2e.ngrok.io/"
         ]);
     return oAuth2Client;
