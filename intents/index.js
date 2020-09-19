@@ -3,11 +3,9 @@ const Availability = require("./Availability");
 const Notification = require("./Notification");
 const Task = require("./Task");
 const Client = require("./Client");
-const CreateMeet=require("./CreateMeet");
+const CreateMeet = require("./CreateMeet");
 
 module.exports = (req, res) => {
-  // console.log(JSON.stringify(req.body))
-
   const Request = {
     Intent: req.body.queryResult.intent,
     QueryText: req.body.queryResult.queryText

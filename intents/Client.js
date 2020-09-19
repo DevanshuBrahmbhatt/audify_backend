@@ -47,14 +47,11 @@ class Client {
   }
 
   static async getUpdates(req, res, Request) {
-
-    // console.log(Request);
-
     const client = await Clientsc.findOne({
-      firstName:Request.User.given_name
+      firstName: Request.User.given_name,
     });
 
-console.log("data"+client);
+    console.log("data" + client);
     let message;
     if (client.chat[0].message) {
       message = ` Hello your work update is ${client.chat[0].message}, And Would you like to send them feedback  `;
