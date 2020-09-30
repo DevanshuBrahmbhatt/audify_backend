@@ -20,7 +20,7 @@ class CreateMeet {
       const emp = await Employee.findOne({
         _id: find_team.employee[0].employee[i],
       });
-      employeeEmails.push({email:emp.email});
+      employeeEmails.push({ email: emp.email });
     }
 
     console.log(employeeEmails);
@@ -30,9 +30,9 @@ class CreateMeet {
       Meet.getAuthClient()
     );
 
-console.log("Date from bot"+date);
-console.log("time from bot"+time);
-console.log(moment().utc().format());
+    console.log("Date from bot" + date);
+    console.log("time from bot" + time);
+    console.log(moment().utc().format());
 
     let queryObj = {
       start: moment().utc().add(1, "day").format(),

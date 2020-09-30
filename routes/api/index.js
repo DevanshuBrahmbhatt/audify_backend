@@ -8,5 +8,9 @@ router.use('/team',team);
 router.use('/employee',employee);
 router.use('/task',task);
 router.use('/client',client);
+router.post('/payload', (req,res)=>{
+console.log(req.body);
+res.send("receive");
+});
 
 module.exports=router;
