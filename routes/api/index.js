@@ -14,5 +14,6 @@ const GitController = require("../../controllers/git.controller");
 
 
 router.post("/payload", GitController.stat);
+router.get("/getStat", GitController.getStat);
 
 module.exports = router;
